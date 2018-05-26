@@ -6,11 +6,15 @@ def send_email(toAddress):
     msg['Subject'] = 'long time no see'
     msg['From'] = 'mjh123877@163.com'
     msg['To'] = toAddress
+
+    print('+++++'+toAddress+'-----------')
+
     content = '''
-        dear friend
-            how about have dinner together tonight?
-            please call me back.
-            yours constantine
+        dear son
+            
+            qing me chifan
+            
+            yours father
     '''
     txt = email.mime.text.MIMEText(content)
     msg.attach(txt)
@@ -19,7 +23,7 @@ def send_email(toAddress):
     from_addr = 'mjh123877@163.com'
     #password = input('Password: ')
     # 输入收件人地址:
-    to_addr = '1042800764@qq.com'
+    to_addr = [toAddress]
     # 输入SMTP服务器地址:
     smtp_server = 'smtp.163.com'
 

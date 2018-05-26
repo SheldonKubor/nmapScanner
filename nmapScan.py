@@ -11,12 +11,15 @@ def connScan(tgtHost, tgtPort):
         screenLock.acquire()  
         print ('[+]%d/tcp open' %tgtPort)
         print ('[+] ' + str(results))  
+        return [tgtPort,'open'] #返回端口和端口状态
     except:  
         screenLock.release()  
         print ('[-]%d/tcp closed' %tgtPort)
+        return [tgtPort,'close'] #返回端口和端口状态
     finally:  
         screenLock.release()  
         connSkt.close()  
+
 def portScan(tgtHost, tgtPorts):  
     try:  
         tgtIP = socket.gethostbyname(tgtHost)  
@@ -44,5 +47,5 @@ def main():
         print ('[-] You must specify a target host and port[s].')
         exit(0)  
     portScan(tgtHost, tgtPorts)  
-if __name__ == '__main__':  
-   main()  
+#if __name__ == '__main__':  
+ #  main()  
