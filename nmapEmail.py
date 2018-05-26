@@ -1,11 +1,11 @@
 import email.mime.text
 import email.mime.multipart
 import smtplib
-def send_email():
+def send_email(toAddress):
     msg = email.mime.multipart.MIMEMultipart()
     msg['Subject'] = 'long time no see'
     msg['From'] = 'mjh123877@163.com'
-    msg['To'] = '1042800764@qq.com'
+    msg['To'] = toAddress
     content = '''
         dear friend
             how about have dinner together tonight?
