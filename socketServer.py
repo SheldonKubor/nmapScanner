@@ -19,14 +19,28 @@ serversocket.listen(5)
 
 while True:
     # 建立客户端连接
-    clientsocket,addr = serversocket.accept()      
+    #clientsocket,addr = serversocket.accept()      
 
-    print("连接地址: %s" % str(addr))
+    #print("连接地址: %s" % str(addr))
     
-    ipAddress=clientsocket.recv(1024)
-    print(ipAddress)
+    #ipAddress=clientsocket.recv(1024)
+    #print(ipAddress)
 
-    ns.portScan(ipAddress,[80])#先写死端口
+    #ns.portScan(ipAddress,[80])#先写死端口
+    
+    # 建立客户端连接
+    clientsocket,addr = serversocket.accept()   
+    try:
+        while True:
+            ipAndPort=clientsocket.recv(1024)
+            print(ipAndPort)
 
-    clientsocket.send('receive'.encode('utf-8'))
-        #clientsocket.close()
+            ipAndPortList = ipAndPort.decode('utf-8').split(',')
+
+            t = ns.connScan(ipAndPortList[0],int(ipAndPortList[1]))
+            print(t)
+            clientsocket.send(t.encode('utf-8'))
+    
+            #clientsocket.close()
+    except socket.error:
+        print('error')
