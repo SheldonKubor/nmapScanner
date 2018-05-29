@@ -1,7 +1,6 @@
 import socket
 import sys
 import time
-import nmapClient
 
 def send_url_to_server(scanIp):
     # 创建 socket 对象
@@ -16,7 +15,7 @@ def send_url_to_server(scanIp):
     print(scanIpAndPort)
     # 连接服务，指定主机和端口
     s.connect((host, port))
-    for i in [80,8080,8888,90,9090]:
+    for i in range(10):
         ipAndPort = ''
         ipAndPort = scanIpAndPort+','+str(i)
         print (ipAndPort)
