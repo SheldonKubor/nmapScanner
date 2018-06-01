@@ -66,7 +66,7 @@ def delContent(tree):
 
 def send_email(toAddress,content):
     msg = email.mime.multipart.MIMEMultipart()
-    msg['Subject'] = 'long time no see'
+    msg['Subject'] = 'scan result'
     msg['From'] = 'mjh123877@163.com'
     msg['To'] = toAddress
 
