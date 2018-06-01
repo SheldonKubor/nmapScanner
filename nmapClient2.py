@@ -39,8 +39,16 @@ def send_url_to_server(scanIp,port):
 #send_url_to_server('123456789')
 def sendUrl():
     urlAddress = urlEntry.get()
-    for i in range(10):
+    beginPort = int(beginPortEntry.get())
+    endPort = int(endPortEntry.get())
+    for i in range(beginPort,endPort):
         send_url_to_server(urlAddress,i)
+
+'''------------------------------------------'''
+def delContent(tree):
+    x=tree.get_children()
+    for item in x:
+        tree.delete(item)
 
 '''-------------------------------------------'''
 
@@ -86,6 +94,11 @@ topFrame = tk.Frame(root)
 urlLabel = tk.Label(topFrame,text="url")
 urlEntry = tk.Entry(topFrame)
 
+beginPortLabel = tk.Label(topFrame,text='开始端口')
+beginPortEntry = tk.Entry(topFrame,width = 5)
+
+endPortLabel = tk.Label(topFrame,text='结束端口')
+endPortEntry = tk.Entry(topFrame,width = 5)
 '''
 #urlAddress = urlEntry.get()#获取输入框中的地址
 #scanUrl = partial(ns.portScan,urlAddress,[8080,80])#增加参数，将url和端口号作为参数传递给send_mail函数
@@ -99,6 +112,10 @@ reportButton = tk.Button(topFrame,text = "生成报告")
     #添加到父级容器中
 urlLabel.pack(side = tk.LEFT)
 urlEntry.pack(side = tk.LEFT)
+beginPortLabel.pack(side = tk.LEFT)
+beginPortEntry.pack(side = tk.LEFT)
+endPortLabel.pack(side = tk.LEFT)
+endPortEntry.pack(side = tk.LEFT)
 scanButton.pack(side = tk.LEFT)
 reportButton.pack(side = tk.LEFT)
 
