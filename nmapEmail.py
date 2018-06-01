@@ -3,7 +3,7 @@ import email.mime.multipart
 import smtplib
 def send_email(toAddress):
     msg = email.mime.multipart.MIMEMultipart()
-    msg['Subject'] = 'long time no see'
+    msg['Subject'] = 'ip scan result'
     msg['From'] = 'mjh123877@163.com'
     msg['To'] = toAddress
 

@@ -45,7 +45,7 @@ def send_url_to_server(scanIp,port):
     #s.close()
 
     print (result)
-    time.sleep(1)
+    #time.sleep(1)
     #s.close()
 
 #send_url_to_server('123456789')
