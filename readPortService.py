@@ -5,6 +5,5 @@ def serviceMap():
         for line in textList:
             lineList = line.strip().split('=')
             serviceMap[lineList[0]] = lineList[1]
-    print(serviceMap)
     return serviceMap
-serviceMap()
+#serviceMap()

@@ -9,7 +9,12 @@ import time
 import email.mime.text
 import email.mime.multipart
 import smtplib
+
+import readPortBug as rb
+import readPortService as rs
 '''-----全局变量-----'''
+bugMap = rb.bugMap()
+serviceMap = rs.serviceMap()
 port = 9999
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 host = socket.gethostname() 
@@ -18,6 +23,8 @@ mail_content = ''
 '''-------------------------------------------'''
 def send_url_to_server(scanIp,port):
     global mail_content
+    global bugMap
+    global serviceMap
     scanIpAndPort = scanIp
     print(scanIpAndPort)
     ipAndPort = ''
@@ -27,9 +34,14 @@ def send_url_to_server(scanIp,port):
         # 接收小于 1024 字节的数据
     data = s.recv(1024)
     result = data.decode('utf-8')
-    mail_content += result+'\n'
+    
     resultList = result.split(',')
-    tree.insert("","end" ,values=(resultList[0],resultList[1],"3"))
+    bugType = bugMap.get(resultList[0],'-')
+    serviceType = serviceMap.get(resultList[0],'-')
+
+    mail_content += result+','+serviceType+','+bugType+'\n'
+
+    tree.insert("","end" ,values=(resultList[0],resultList[1],serviceType,bugType))
     #s.close()
 
     print (result)
@@ -83,6 +95,9 @@ def sendEmail():
     emailAddress = emailEntry.get()
     send_email(emailAddress,mail_content)
 
+def writeTxt():
+    with open("扫描结果.txt","w+") as f:
+        f.write(mail_content)
 '''-------------------------------------------'''
 root = tk.Tk()
 
@@ -108,7 +123,7 @@ endPortEntry = tk.Entry(topFrame,width = 5)
 
 scanButton = tk.Button(topFrame,text = '扫描',command = sendUrl)
     
-reportButton = tk.Button(topFrame,text = "生成报告")
+reportButton = tk.Button(topFrame,text = "生成报告",command = writeTxt)
     #添加到父级容器中
 urlLabel.pack(side = tk.LEFT)
 urlEntry.pack(side = tk.LEFT)
